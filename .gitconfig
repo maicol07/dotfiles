@@ -1,0 +1,12 @@
+[core]
+	autocrlf = true
+[user]
+	email = maicolbattistini@live.it
+	name = Maicol Battistini
+	signingkey = F4442F9EF1B015FD8AC21ACA4FDB0F87CDB1D34A
+[credential]
+	helper = store
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main

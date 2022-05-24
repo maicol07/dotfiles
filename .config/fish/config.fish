@@ -10,7 +10,7 @@
 #end
 
 # PATH additions
-set PATH $PATH /home/maicol07/.local/bin $FORGIT_INSTALL_DIR/bin
+set PATH $PATH ~/.local/bin $FORGIT_INSTALL_DIR/bin
 
 # tabtab source for packages
 # uninstall by removing these lines

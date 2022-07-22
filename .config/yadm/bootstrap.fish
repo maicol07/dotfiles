@@ -40,27 +40,39 @@ eget_install "sharkdp/bat"
 eget_install "Peltoche/lsd"
 eget_install "zyedidia/micro"
 
-# PPAs
-sudo add-apt-repository ppa:ondrej/php -y
-
-sudo nala update
-
-# Packages
-sudo nala install mariadb-server neofetch php-cli php8.1-xdebug pinentry-qt synaptic tree ttf-mscorefonts-installer wslu xclip -y
-
 # Fisher
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 read -za plugins < .config/fish/fish_plugins
 fisher install $plugins
 
-# WSL sudo Windows Hello
-set install_wsl_hello_sudo (read_confirm "Do you want to install WSL Hello Sudo?")
-if test -z install_wsl_hello_sudo
-    wget http://github.com/nullpo-head/WSL-Hello-sudo/releases/latest/download/release.tar.gz
-    tar xvf release.tar.gz
-    cd release
-    ./install.sh
-    cd ..
-    rm release
-    rm release.tar.gza
+# PPAs
+sudo nala update
+
+# Packages
+sudo nala install fzf neofetch tree ttf-mscorefonts-installer xclip -y
+
+if (test -z read_confirm "Install web related packages?")
+    sudo add-apt-repository ppa:ondrej/php -y
+    sudo nala update
+    sudo nala install mariadb-server php-cli php8.1-xdebug
+end
+
+if (test -z read_confirm "Install WSL utils?")
+    sudo nala install wslu
+
+    # WSL sudo Windows Hello
+    set install_wsl_hello_sudo (read_confirm "Do you want to install WSL Hello Sudo?")
+    if test -z install_wsl_hello_sudo
+        wget http://github.com/nullpo-head/WSL-Hello-sudo/releases/latest/download/release.tar.gz
+        tar xvf release.tar.gz
+        cd release
+        ./install.sh
+        cd ..
+        rm release
+        rm release.tar.gza
+    end
+end
+
+if (test -z read_confirm "Install GUI packages?")
+    sudo nala install pinentry-qt synaptic
 end

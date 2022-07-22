@@ -10,3 +10,7 @@
 	gpgsign = true
 [init]
 	defaultBranch = main
+[pull]
+	rebase = false
+# [gpg]
+	# format = ssh

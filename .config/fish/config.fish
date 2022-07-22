@@ -10,7 +10,7 @@
 #end
 
 # PATH additions
-set PATH $PATH ~/.local/bin $FORGIT_INSTALL_DIR/bin
+set PATH $PATH ~/.local/bin $FORGIT_INSTALL_DIR/bin $HOME/.config/composer/vendor/bin
 
 # tabtab source for packages
 # uninstall by removing these lines
@@ -29,3 +29,7 @@ export GPG_TTY=(tty)
 #end
 
 . $HOME/omni-socat/ubuntu-fish.setup.fish
+# pnpm
+set -gx PNPM_HOME "/home/maicol07/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end

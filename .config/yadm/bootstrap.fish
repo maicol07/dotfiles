@@ -51,13 +51,13 @@ sudo nala update
 # Packages
 sudo nala install fzf neofetch tree ttf-mscorefonts-installer xclip -y
 
-if (test -z read_confirm "Install web related packages?")
+if test -z read_confirm "Install web related packages?"
     sudo add-apt-repository ppa:ondrej/php -y
     sudo nala update
     sudo nala install mariadb-server php-cli php8.1-xdebug
 end
 
-if (test -z read_confirm "Install WSL utils?")
+if test -z read_confirm "Install WSL utils?"
     sudo nala install wslu
 
     # WSL sudo Windows Hello
@@ -73,6 +73,6 @@ if (test -z read_confirm "Install WSL utils?")
     end
 end
 
-if (test -z read_confirm "Install GUI packages?")
+if test -z read_confirm "Install GUI packages?"
     sudo nala install pinentry-qt synaptic
 end

@@ -61,7 +61,7 @@ if test -z (read_confirm "Install WSL utils?")
     sudo nala install wslu
 
     # WSL sudo Windows Hello
-    if test -z (read_confim "Do you want to install WSL Hello Sudo and use sudo with Windows Hello?")
+    if test -z (read_confirm "Do you want to install WSL Hello Sudo and use sudo with Windows Hello?")
         wget http://github.com/nullpo-head/WSL-Hello-sudo/releases/latest/download/release.tar.gz
         tar xvf release.tar.gz
         cd release

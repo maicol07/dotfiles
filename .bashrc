@@ -118,4 +118,6 @@ fi
 
 export GPG_TTY=$(tty)
 
-source $HOME/omni-socat/ubuntu-bash.setup.sh
+if [[ -f $HOME/omni-socat/ubuntu-bash.setup.sh ]]; then
+    source $HOME/omni-socat/ubuntu-bash.setup.sh
+fi

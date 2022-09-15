@@ -28,8 +28,12 @@ export GPG_TTY=(tty)
 #  exec /usr/bin/genie -s
 #end
 
-. $HOME/omni-socat/ubuntu-fish.setup.fish
+if test -f $HOME/omni-socat/ubuntu-fish.setup.fish
+    source $HOME/omni-socat/ubuntu-fish.setup.fish
+end
+
 # pnpm
-set -gx PNPM_HOME "/home/maicol07/.local/share/pnpm"
-set -gx PATH "$PNPM_HOME" $PATH
-# pnpm end
+if test -d $HOME/.local/share/pnpm
+    set -gx PNPM_HOME $HOME/.local/share/pnpm
+    set -gx PATH "$PNPM_HOME" $PATH
+end

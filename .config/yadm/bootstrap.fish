@@ -77,6 +77,11 @@ if test -z (read_confirm "Install Synaptic?")
 end
 
 if test -z (read_confirm "Download WSL pinentry?")
-    wget https://raw.githubusercontent.com/diablodale/pinentry-wsl-ps1/master/pinentry-wsl-ps1.sh
+    wget https://raw.githubusercontent.com/diablodale/pinentry-wsl-ps1/master/pinentry-wsl-ps1.sh -o $HOME/pinentry-wsl-ps1.sh
     echo "Check configuration at https://github.com/diablodale/pinentry-wsl-ps1"
+end
+
+if test -z (read_confirm "Install Omni SSH Agent?")
+    mkdir -p $HOME/omni-socat
+    curl -sL https://raw.githubusercontent.com/masahide/OmniSSHAgent/main/hack/ubuntu-fish.setup.fish -o $HOME/omni-socat/ubuntu-fish.setup.fish
 end

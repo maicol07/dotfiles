@@ -51,18 +51,17 @@ sudo nala update
 # Packages
 sudo nala install fzf neofetch tree ttf-mscorefonts-installer xclip -y
 
-if test -z read_confirm "Install web related packages?"
+if test -z (read_confirm "Install web related packages?")
     sudo add-apt-repository ppa:ondrej/php -y
     sudo nala update
     sudo nala install mariadb-server php-cli php8.1-xdebug
 end
 
-if test -z read_confirm "Install WSL utils?"
+if test -z (read_confirm "Install WSL utils?")
     sudo nala install wslu
 
     # WSL sudo Windows Hello
-    set install_wsl_hello_sudo (read_confirm "Do you want to install WSL Hello Sudo?")
-    if test -z install_wsl_hello_sudo
+    if test -z (read_confim "Do you want to install WSL Hello Sudo and use sudo with Windows Hello?")
         wget http://github.com/nullpo-head/WSL-Hello-sudo/releases/latest/download/release.tar.gz
         tar xvf release.tar.gz
         cd release
@@ -73,11 +72,11 @@ if test -z read_confirm "Install WSL utils?"
     end
 end
 
-if test -z read_confirm "Install Synaptic?"
+if test -z (read_confirm "Install Synaptic?")
     sudo nala install synaptic
 end
 
-if test -z read_confirm "Download WSL pinentry?"
+if test -z (read_confirm "Download WSL pinentry?")
     wget https://raw.githubusercontent.com/diablodale/pinentry-wsl-ps1/master/pinentry-wsl-ps1.sh
     echo "Check configuration at https://github.com/diablodale/pinentry-wsl-ps1"
 end

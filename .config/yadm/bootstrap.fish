@@ -73,6 +73,11 @@ if test -z read_confirm "Install WSL utils?"
     end
 end
 
-if test -z read_confirm "Install GUI packages?"
-    sudo nala install pinentry-qt synaptic
+if test -z read_confirm "Install Synaptic?"
+    sudo nala install synaptic
+end
+
+if test -z read_confirm "Download WSL pinentry?"
+    wget https://raw.githubusercontent.com/diablodale/pinentry-wsl-ps1/master/pinentry-wsl-ps1.sh
+    echo "Check configuration at https://github.com/diablodale/pinentry-wsl-ps1"
 end

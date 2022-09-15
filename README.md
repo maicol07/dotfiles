@@ -19,4 +19,4 @@ And type Y when yadm asks you if you want to run the bootstrap script
 ### Manual installation
 
 Download the repo and paste it into your user directory.  
-Then you can run the `.config/yadm/bootstrap` script ù,
+Then you can run the `.config/yadm/bootstrap` script.

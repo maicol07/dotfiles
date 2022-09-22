@@ -41,9 +41,11 @@ eget_install "Peltoche/lsd"
 eget_install "zyedidia/micro"
 
 # Fisher
+cp $HOME/.config/fish/fish_plugins $HOME/.config/fish/fish_plugins_to_install
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-read -za plugins < .config/fish/fish_plugins
+read -za plugins < $HOME/.config/fish/fish_plugins_to_install
 fisher install $plugins
+rm $HOME/.config/fish/fish_plugins_to_install
 
 # PPAs
 sudo nala update

@@ -3,14 +3,27 @@
 [user]
 	email = maicolbattistini@live.it
 	name = Maicol Battistini
-	signingkey = F4442F9EF1B015FD8AC21ACA4FDB0F87CDB1D34A
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINsTYhlq5t/r3eawNERL09+PltjDh+fLQO1gE5TgWGmr
 [credential]
 	helper = store
-[commit]
-	gpgsign = true
+
 [init]
 	defaultBranch = main
 [pull]
 	rebase = false
-# [gpg]
-	# format = ssh
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/mnt/c/Users/Maicol/AppData/Local/1Password/app/8/op-ssh-sign.exe"
+
+[commit]
+  gpgsign = true
+
+
+[includeIf "hasconfig:remote.*.url:https://gitlab*/**"]
+	[user]
+		signingkey = F4442F9EF1B015FD8AC21ACA4FDB0F87CDB1D34A
+	[gpg]
+		format = openpgp

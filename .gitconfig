@@ -23,7 +23,4 @@
 
 
 [includeIf "hasconfig:remote.*.url:https://gitlab*/**"]
-	[user]
-		signingkey = F4442F9EF1B015FD8AC21ACA4FDB0F87CDB1D34A
-	[gpg]
-		format = openpgp
+	path = .gitlab.gitconfig

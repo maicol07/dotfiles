@@ -38,7 +38,10 @@ rm eget.sh
 
 eget_install "sharkdp/bat"
 eget_install "Peltoche/lsd"
+
+# Micro
 eget_install "zyedidia/micro"
+micro -plugin install aspell bookmark detectindent editorconfig filemanager fish fzf jump quoter wc
 
 # Fisher
 cp $HOME/.config/fish/fish_plugins $HOME/.config/fish/fish_plugins_to_install

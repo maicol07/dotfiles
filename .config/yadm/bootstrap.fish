@@ -38,7 +38,10 @@ rm eget.sh
 
 eget_install "sharkdp/bat"
 eget_install "Peltoche/lsd"
+
+# Micro
 eget_install "zyedidia/micro"
+micro -plugin install aspell bookmark detectindent editorconfig filemanager fish fzf jump quoter wc
 
 # Fisher
 cp $HOME/.config/fish/fish_plugins $HOME/.config/fish/fish_plugins_to_install
@@ -53,17 +56,20 @@ sudo nala update
 # Packages
 sudo nala install fzf neofetch tree ttf-mscorefonts-installer xclip -y
 
-if test -z (read_confirm "Install web related packages?")
+read_confirm "Install web related packages?"
+if test -z $status
     sudo add-apt-repository ppa:ondrej/php -y
     sudo nala update
     sudo nala install mariadb-server php-cli php8.1-xdebug
 end
 
-if test -z (read_confirm "Install WSL utils?")
+read_confirm "Install WSL utils?"
+if test -z $status
     sudo nala install wslu
 
     # WSL sudo Windows Hello
-    if test -z (read_confirm "Do you want to install WSL Hello Sudo and use sudo with Windows Hello?")
+    read_confirm "Do you want to install WSL Hello Sudo and use sudo with Windows Hello?"
+    if test -z $status
         wget http://github.com/nullpo-head/WSL-Hello-sudo/releases/latest/download/release.tar.gz
         tar xvf release.tar.gz
         cd release
@@ -74,16 +80,19 @@ if test -z (read_confirm "Install WSL utils?")
     end
 end
 
-if test -z (read_confirm "Install Synaptic?")
+read_confirm "Install Synaptic?"
+if test -z $status
     sudo nala install synaptic
 end
 
-if test -z (read_confirm "Download WSL pinentry?")
+read_confirm "Download WSL pinentry?"
+if test -z $status
     wget https://raw.githubusercontent.com/diablodale/pinentry-wsl-ps1/master/pinentry-wsl-ps1.sh -o $HOME/pinentry-wsl-ps1.sh
     echo "Check configuration at https://github.com/diablodale/pinentry-wsl-ps1"
 end
 
-if test -z (read_confirm "Install Omni SSH Agent?")
+read_confirm "Install Omni SSH Agent?"
+if test -z $status
     mkdir -p $HOME/omni-socat
     curl -sL https://raw.githubusercontent.com/masahide/OmniSSHAgent/main/hack/ubuntu-fish.setup.fish -o $HOME/omni-socat/ubuntu-fish.setup.fish
 end

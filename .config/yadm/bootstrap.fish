@@ -54,7 +54,7 @@ rm $HOME/.config/fish/fish_plugins_to_install
 sudo nala update
 
 # Packages
-sudo nala install fzf neofetch tree ttf-mscorefonts-installer xclip -y
+sudo nala install fzf neofetch tree ttf-mscorefonts-installer xclip tldr -y
 
 read_confirm "Install web related packages?"
 if test -z $status
@@ -66,6 +66,10 @@ end
 read_confirm "Install WSL utils?"
 if test -z $status
     sudo nala install wslu
+
+    # SSH with Git on WSL
+    sudo cp $HOME/.config/yadm/git-wsl /usr/bin/git-wsl
+    sudo chmod +x /usr/bin/git-wsl
 
     # WSL sudo Windows Hello
     read_confirm "Do you want to install WSL Hello Sudo and use sudo with Windows Hello?"
@@ -96,3 +100,4 @@ if test -z $status
     mkdir -p $HOME/omni-socat
     curl -sL https://raw.githubusercontent.com/masahide/OmniSSHAgent/main/hack/ubuntu-fish.setup.fish -o $HOME/omni-socat/ubuntu-fish.setup.fish
 end
+

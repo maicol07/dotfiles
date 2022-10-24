@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Allow to use SSH agent in git from Jetbrains IDEs
+export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+
+/usr/bin/git "$@"

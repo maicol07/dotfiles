@@ -57,14 +57,14 @@ sudo nala update
 sudo nala install -y fzf neofetch tree ttf-mscorefonts-installer xclip tldr -y
 
 read_confirm "Install web related packages?"
-if test -z $status
+if test $status -eq 0
     sudo add-apt-repository ppa:ondrej/php -y
     sudo nala update
     sudo nala install -y mariadb-server php-cli php8.1-xdebug
 end
 
 read_confirm "Install WSL utils?"
-if test -z $status
+if test $status -eq 0
     sudo nala install -y wslu
 
     # SSH with Git on WSL
@@ -73,7 +73,7 @@ if test -z $status
 
     # WSL sudo Windows Hello
     read_confirm "Do you want to install WSL Hello Sudo and use sudo with Windows Hello?"
-    if test -z $status
+    if test $status -eq 0
         wget http://github.com/nullpo-head/WSL-Hello-sudo/releases/latest/download/release.tar.gz
         tar xvf release.tar.gz
         cd release
@@ -85,18 +85,18 @@ if test -z $status
 end
 
 read_confirm "Install Synaptic?"
-if test -z $status
+if test $status -eq 0
     sudo nala install -y synaptic
 end
 
 read_confirm "Download WSL pinentry?"
-if test -z $status
+if test $status -eq 0
     wget https://raw.githubusercontent.com/diablodale/pinentry-wsl-ps1/master/pinentry-wsl-ps1.sh -o $HOME/pinentry-wsl-ps1.sh
     echo "Check configuration at https://github.com/diablodale/pinentry-wsl-ps1"
 end
 
 read_confirm "Install Omni SSH Agent?"
-if test -z $status
+if test $status -eq 0
     mkdir -p $HOME/omni-socat
     curl -sL https://raw.githubusercontent.com/masahide/OmniSSHAgent/main/hack/ubuntu-fish.setup.fish -o $HOME/omni-socat/ubuntu-fish.setup.fish
 end

@@ -54,18 +54,18 @@ rm $HOME/.config/fish/fish_plugins_to_install
 sudo nala update
 
 # Packages
-sudo nala install fzf neofetch tree ttf-mscorefonts-installer xclip tldr -y
+sudo nala install -y fzf neofetch tree ttf-mscorefonts-installer xclip tldr -y
 
 read_confirm "Install web related packages?"
 if test -z $status
     sudo add-apt-repository ppa:ondrej/php -y
     sudo nala update
-    sudo nala install mariadb-server php-cli php8.1-xdebug
+    sudo nala install -y mariadb-server php-cli php8.1-xdebug
 end
 
 read_confirm "Install WSL utils?"
 if test -z $status
-    sudo nala install wslu
+    sudo nala install -y wslu
 
     # SSH with Git on WSL
     sudo cp $HOME/.config/yadm/git-wsl /usr/bin/git-wsl
@@ -86,7 +86,7 @@ end
 
 read_confirm "Install Synaptic?"
 if test -z $status
-    sudo nala install synaptic
+    sudo nala install -y synaptic
 end
 
 read_confirm "Download WSL pinentry?"

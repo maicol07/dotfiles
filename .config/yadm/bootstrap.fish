@@ -101,3 +101,4 @@ if test $status -eq 0
     curl -sL https://raw.githubusercontent.com/masahide/OmniSSHAgent/main/hack/ubuntu-fish.setup.fish -o $HOME/omni-socat/ubuntu-fish.setup.fish
 end
 
+echo "set_color green; echo -n "Dotfiles applied! Please restart your shell to use Fish shell. Some things you can check and customize: Git config (especially user name and email)."; set_color normal"

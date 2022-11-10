@@ -56,14 +56,14 @@ sudo nala update
 # Packages
 sudo nala install -y fzf neofetch tree ttf-mscorefonts-installer xclip tldr -y
 
-read_confirm "Install web related packages?"
+read_confirm "Install web-backend related packages (PHP, MySQL)?"
 if test $status -eq 0
     sudo add-apt-repository ppa:ondrej/php -y
     sudo nala update
     sudo nala install -y mariadb-server php-cli php8.1-xdebug
 end
 
-read_confirm "Install WSL utils?"
+read_confirm "Install utilities for WSL (wslu, Git w/ssh, Windows Hello sudo)?"
 if test $status -eq 0
     sudo nala install -y wslu
 
@@ -84,12 +84,12 @@ if test $status -eq 0
     end
 end
 
-read_confirm "Install Synaptic?"
+read_confirm "Install Synaptic (GUI package manager)?"
 if test $status -eq 0
     sudo nala install -y synaptic
 end
 
-read_confirm "Download WSL pinentry?"
+read_confirm "Download WSL pinentry (for GPG)?"
 if test $status -eq 0
     wget https://raw.githubusercontent.com/diablodale/pinentry-wsl-ps1/master/pinentry-wsl-ps1.sh -o $HOME/pinentry-wsl-ps1.sh
     echo "Check configuration at https://github.com/diablodale/pinentry-wsl-ps1"

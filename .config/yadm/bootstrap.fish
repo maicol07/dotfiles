@@ -54,7 +54,7 @@ rm $HOME/.config/fish/fish_plugins_to_install
 sudo nala update
 
 # Packages
-sudo nala install -y fzf neofetch tree ttf-mscorefonts-installer xclip tldr -y
+sudo nala install -y fzf neofetch tree ttf-mscorefonts-installer xclip tldr zip unzip1 -y
 
 read_confirm "Install web-backend related packages (PHP, MySQL)?"
 if test $status -eq 0

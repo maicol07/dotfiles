@@ -61,6 +61,8 @@ if test $status -eq 0
     sudo add-apt-repository ppa:ondrej/php -y
     sudo nala update
     sudo nala install -y mariadb-server php-cli php8.1-xdebug
+    # Fix for root access without password
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password USING PASSWORD('');" | sudo mysql
 end
 
 read_confirm "Install utilities for WSL (wslu, Git w/ssh, Windows Hello sudo)?"
@@ -76,11 +78,9 @@ if test $status -eq 0
     if test $status -eq 0
         wget http://github.com/nullpo-head/WSL-Hello-sudo/releases/latest/download/release.tar.gz
         tar xvf release.tar.gz
-        cd release
-        ./install.sh
-        cd ..
+        ./release/install.sh
         rm release
-        rm release.tar.gza
+        rm release.tar.gz
     end
 end
 

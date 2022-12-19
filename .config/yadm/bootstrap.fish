@@ -54,7 +54,7 @@ rm $HOME/.config/fish/fish_plugins_to_install
 sudo nala update
 
 # Packages
-sudo nala install -y fzf neofetch tree ttf-mscorefonts-installer xclip tldr zip unzip1 -y
+sudo nala install -y fzf neofetch tree ttf-mscorefonts-installer xclip tldr zip unzip python3 python-is-python3 -y
 
 read_confirm "Install web-backend related packages (PHP, MySQL)?"
 if test $status -eq 0
@@ -82,6 +82,10 @@ if test $status -eq 0
         rm release
         rm release.tar.gz
     end
+
+    wget https://github.com/Chronial/wsl-sudo/raw/master/wsl-sudo.py
+    sudo mv wsl-sudo.py /usr/local/share
+    alias --save wudo "python3 /usr/local/share/wsl-sudo.py"
 end
 
 read_confirm "Install Synaptic (GUI package manager)?"
@@ -105,6 +109,8 @@ read_confirm "Want to set Fish shell as default shell?"
 if test $status -eq 0
     chsh -s (which fish)
 end
+
+
 
 set_color green;
 echo -n "Dotfiles applied! Please restart your shell to use Fish shell if you set it as default shell. Some things you can check and customize: Git config (especially user name and email).";

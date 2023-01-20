@@ -7,4 +7,9 @@ sudo apt-add-repository ppa:fish-shell/release-3 -y
 sudo apt-get update
 sudo apt-get install fish nala -y
 
-fish .config/yadm/bootstrap.fish
+# Check if WSLg is available. If true, use dialogs to ask for user input. Otherwise, use old script (textual interface).
+if [ -z ${DISPLAY+x} ]; then
+    fish .config/yadm/bootstrap.fish
+else
+    fish .config/yadm/bootstrap_old.fish
+fi

@@ -1,0 +1,16 @@
+.aws
+.azure
+.bash_history
+.bash_logout
+.cache
+.docker
+.java
+.local
+.minikube
+.npm
+.sonarlint
+.vscode-server
+com
+Projects
+snap
+*.log

@@ -19,15 +19,7 @@
 
 [gpg "ssh"]
 	program = /mnt/c/Users/Maicol/AppData/Local/1Password/app/8/op-ssh-sign.exe
-
-[gpg "openpgp"]
-	program = /usr/bin/gpg
+	allowedSignersFile = /home/maicol07/.ssh/allowed_signers
 
 [commit]
   gpgsign = true
-
-[includeIf "hasconfig:remote.*.url:https://*gitlab*/**"]
-	path = .gitlab.gitconfig
-
-[includeIf "hasconfig:remote.*.url:git@*gitlab*/**"]
-	path = .gitlab.gitconfig

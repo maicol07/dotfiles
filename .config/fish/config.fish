@@ -39,7 +39,9 @@ end
 
 #set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 #GWSL
 #set -gx PULSE_SERVER tcp:(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
-zoxide init fish | source
+if command -q zoxide
+    zoxide init fish | source
+end
 
 set -gx JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 # xsettingsd &

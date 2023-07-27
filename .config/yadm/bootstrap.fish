@@ -1,16 +1,5 @@
+#!/bin/fish
 set arch (dpkg --print-architecture)
-
-function eget_install --description 'Get and install a deb package from Github' -a repo name
-    if test -z $name
-        set splitted (string split "/" $repo)
-        set name $splitted[2]
-    end
-
-    echo "Downloading and installing $name..."
-    eget $repo -a "$arch.deb" -a $name"_" --download-only --to package.deb -q
-    sudo dpkg -i package.deb
-    rm package.deb
-end
 
 function read_confirm --description 'Ask the user for confirmation' --argument prompt
     if test -z "$prompt"
@@ -41,17 +30,10 @@ echo "deb http://packages.azlux.fr/debian/ buster main" | sudo tee /etc/apt/sour
 wget -qO - https://azlux.fr/repo.gpg | sudo apt-key add -
 curl -SsL https://packages.httpie.io/deb/KEY.gpg | apt-key add -
 curl -SsL -o /etc/apt/sources.list.d/httpie.list https://packages.httpie.io/deb/httpie.list
+sudo add-apt-repository ppa:marwanhawari/stew
 sudo nala update
 
-sudo nala install kdialog -y
-
-# Eget
-curl -o eget.sh https://zyedidia.github.io/eget.sh
-shasum -a 256 eget.sh # verify with hash below
-bash eget.sh
-sudo mv eget /usr/local/bin/eget
-rm eget.sh
-
+sudo nala install kdialog stew -y
 
 kdialog --title "Dotfiles" --yesno "Do you want to apply dotfiles? This will overwrite your current configuration."
 if test $status -eq 1
@@ -73,7 +55,7 @@ set packages (kdialog --checklist "Select which package you want to install (rec
     "unzip" "unzip - A compression and file packaging/archive utility." on \
     "python3" "python3 - An interpreted, high-level, general-purpose programming language." on \
     "python-is-python3" "python-is-python3 - A transitional package that ensures that python is python3." on \
-    "ttf-ancient-fonts" "ttf-ancient-fonts - A collection of fonts from the ancient world (emojis)." on \
+    "fonts-noto-color-emoji" "fonts-noto-color-emoji - color emoji font from Google." on \
     "bootandy/dust" "dust - A more intuitive version of du in rust." on \
     "duf" "duf - Disk Usage/Free Utility - a better 'df' alternative." on \
     "sharkdp/fd" "fd - A simple, fast and user-friendly alternative to 'find'." on \
@@ -88,7 +70,7 @@ set packages (kdialog --checklist "Select which package you want to install (rec
 set nala_packages ""
 for package in $packages
     if test (echo $package | grep -c "/") -gt 0
-        eget_install $package
+        stew install $package
     else
         set nala_packages "$nala_packages $package"
     end

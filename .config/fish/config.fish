@@ -1,14 +1,3 @@
-#if status is-interactive
-    # Commands to run in interactive sessions can go here
-#end
-
-#begin
-#    set -l HOSTNAME (hostname)
-#    if test -f ~/.keychain/$HOSTNAME-fish
-#        source ~/.keychain/$HOSTNAME-fish
-#    end
-#end
-
 # PATH additions
 set PATH $PATH ~/.local/bin $FORGIT_INSTALL_DIR/bin $HOME/.config/composer/vendor/bin
 
@@ -21,13 +10,6 @@ set PATH $PATH ~/.local/bin $FORGIT_INSTALL_DIR/bin $HOME/.config/composer/vendo
 
 set MICRO_CONFIG_HOME $HOME/.config/micro
 
-export GPG_TTY=(tty)
-
-# Are we in the bottle?
-#if set -q $INSIDE_GENIE
-#  exec /usr/bin/genie -s
-#end
-
 if test -f $HOME/omni-socat/ubuntu-fish.setup.fish
     source $HOME/omni-socat/ubuntu-fish.setup.fish
 end
@@ -37,3 +19,27 @@ if test -d $HOME/.local/share/pnpm
     set -gx PNPM_HOME $HOME/.local/share/pnpm
     set -gx PATH "$PNPM_HOME" $PATH
 end
+
+# See if apps are flagged for light theme
+# Source: https://github.com/scaryrawr/wsl-theme-sync
+set light (powershell.exe -NoProfile -Command Get-ItemPropertyValue "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" -Name "AppsUseLightTheme")
+if test $light -eq 0
+    # Switch to dark theme
+    gsettings set org.gnome.desktop.interface gtk-theme 'Fluent-dark'
+    gsettings set org.gnome.desktop.wm.preferences theme 'Fluent-dark'
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    # jj -v "dukedark-tc" -o .config/micro/settings.json colorscheme
+else
+    # Switch to light theme
+    gsettings set org.gnome.desktop.interface gtk-theme 'Fluent-light'
+    gsettings set org.gnome.desktop.wm.preferences theme 'Fluent-light'
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
+    # jj -v "dukelight-tc" -o .config/micro/settings.json colorscheme
+end
+
+#set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 #GWSL
+#set -gx PULSE_SERVER tcp:(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
+zoxide init fish | source
+
+set -gx JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
+# xsettingsd &

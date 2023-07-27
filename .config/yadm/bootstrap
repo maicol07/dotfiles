@@ -8,7 +8,7 @@ sudo apt-get update
 sudo apt-get install fish nala -y
 
 # Check if WSLg is available. If true, use dialogs to ask for user input. Otherwise, use old script (textual interface).
-if [ -z ${DISPLAY+x} ]; then
+if [ ! -z "$DISPLAY" ] || grep -qs '/mnt/wslg' /proc/mounts; then
     fish .config/yadm/bootstrap.fish
 else
     fish .config/yadm/bootstrap_old.fish

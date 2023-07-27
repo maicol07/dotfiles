@@ -23,3 +23,14 @@
 
 [commit]
   gpgsign = true
+[cola]
+	spellcheck = false
+[gui]
+	editor = gea
+[remote "origin"]
+	tagopt = --tags
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

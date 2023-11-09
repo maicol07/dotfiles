@@ -37,6 +37,9 @@ else
     # jj -v "dukelight-tc" -o .config/micro/settings.json colorscheme
 end
 
+set -gx DISPLAY 127.0.0.1:0.0 #GWSL
+set -gx PULSE_SERVER tcp:127.0.0.1 #GWSL
+
 #set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 #GWSL
 #set -gx PULSE_SERVER tcp:(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
 if command -q zoxide

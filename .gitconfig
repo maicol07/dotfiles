@@ -1,5 +1,6 @@
 [core]
 	autocrlf = true
+	pager = delta
 [user]
 	email = maicolbattistini@live.it
 	name = Maicol Battistini
@@ -25,6 +26,7 @@
   gpgsign = true
 [cola]
 	spellcheck = false
+	statusshowtotals = true
 [gui]
 	editor = gea
 [remote "origin"]
@@ -34,3 +36,21 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+[includeIf "hasconfig:remote.*.url:git@gitlab.trust-itservices.com"]
+	path = .gitlab.gitconfig
+
+[includeIf "gitdir:~/Projects/Trust-IT/"]
+	path = .gitlab.gitconfig
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default

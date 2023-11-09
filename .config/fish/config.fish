@@ -28,11 +28,18 @@ end
 set -gx DISPLAY 127.0.0.1:0.0 #GWSL
 set -gx PULSE_SERVER tcp:127.0.0.1 #GWSL
 
-#set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 #GWSL
-#set -gx PULSE_SERVER tcp:(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
 if command -q zoxide
     zoxide init fish | source
 end
 
 set -gx JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
-# xsettingsd &
+
+setxkbmap -layout it
+
+if test -f ~/.Xresources
+    xrdb -merge ~/.Xresources
+end
+
+[ -f ~/.inshellisense/key-bindings.fish ] && source ~/.inshellisense/key-bindings.fish
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

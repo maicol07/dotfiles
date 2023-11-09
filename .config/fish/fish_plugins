@@ -1,6 +1,5 @@
 jorgebucaran/fisher
 ilancosman/tide
-franciscolourenco/done
 jorgebucaran/autopair.fish
 gazorby/fish-abbreviation-tips
 jorgebucaran/spark.fish
@@ -8,3 +7,4 @@ patrickf1/fzf.fish
 jorgebucaran/nvm.fish
 adriaanzon/fish-artisan-completion
 wfxr/forgit
+jorgebucaran/getopts.fish

@@ -21,20 +21,8 @@ if test -d $HOME/.local/share/pnpm
 end
 
 # See if apps are flagged for light theme
-# Source: https://github.com/scaryrawr/wsl-theme-sync
-set light (powershell.exe -NoProfile -Command Get-ItemPropertyValue "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" -Name "AppsUseLightTheme")
-if test $light -eq 0
-    # Switch to dark theme
-    gsettings set org.gnome.desktop.interface gtk-theme 'Fluent-dark'
-    gsettings set org.gnome.desktop.wm.preferences theme 'Fluent-dark'
-    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-    # jj -v "dukedark-tc" -o .config/micro/settings.json colorscheme
-else
-    # Switch to light theme
-    gsettings set org.gnome.desktop.interface gtk-theme 'Fluent-light'
-    gsettings set org.gnome.desktop.wm.preferences theme 'Fluent-light'
-    gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
-    # jj -v "dukelight-tc" -o .config/micro/settings.json colorscheme
+if test -f ~/autodarkmode-wsl/adm.fish
+    source ~/autodarkmode-wsl/adm.fish
 end
 
 set -gx DISPLAY 127.0.0.1:0.0 #GWSL

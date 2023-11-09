@@ -120,9 +120,6 @@ fi
 
 export GPG_TTY=$(tty)
 
-if [[ -f $HOME/omni-socat/ubuntu-bash.setup.sh ]]; then
-    source $HOME/omni-socat/ubuntu-bash.setup.sh
-fi
 export DISPLAY=127.0.0.1:0.0 #GWSL
 export PULSE_SERVER=tcp:127.0.0.1 #GWSL
 

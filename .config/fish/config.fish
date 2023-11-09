@@ -10,9 +10,9 @@ set PATH $PATH ~/.local/bin $FORGIT_INSTALL_DIR/bin $HOME/.config/composer/vendo
 
 set MICRO_CONFIG_HOME $HOME/.config/micro
 
-if test -f $HOME/omni-socat/ubuntu-fish.setup.fish
-    source $HOME/omni-socat/ubuntu-fish.setup.fish
-end
+# if test -f $HOME/omni-socat/ubuntu-fish.setup.fish
+    # source $HOME/omni-socat/ubuntu-fish.setup.fish
+# end
 
 # pnpm
 if test -d $HOME/.local/share/pnpm

@@ -11,7 +11,7 @@ set PATH $PATH ~/.local/bin $FORGIT_INSTALL_DIR/bin $HOME/.config/composer/vendo
 set MICRO_CONFIG_HOME $HOME/.config/micro
 
 # if test -f $HOME/omni-socat/ubuntu-fish.setup.fish
-    # source $HOME/omni-socat/ubuntu-fish.setup.fish
+#     source $HOME/omni-socat/ubuntu-fish.setup.fish
 # end
 
 # pnpm
@@ -25,16 +25,16 @@ if test -f ~/autodarkmode-wsl/adm.fish
     source ~/autodarkmode-wsl/adm.fish
 end
 
-set -gx DISPLAY 127.0.0.1:0.0 #GWSL
-set -gx PULSE_SERVER tcp:127.0.0.1 #GWSL
+# set -gx DISPLAY 127.0.0.1:0.0 #GWSL
+# set -gx PULSE_SERVER tcp:127.0.0.1 #GWSL
 
 if command -q zoxide
     zoxide init fish | source
 end
 
-set -gx JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
+set -gx JAVA_HOME /usr/lib/jvm/java-21-openjdk-amd64
 
-setxkbmap -layout it
+# setxkbmap -layout it
 
 if test -f ~/.Xresources
     xrdb -merge ~/.Xresources

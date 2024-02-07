@@ -1,6 +1,8 @@
 [core]
 	autocrlf = true
 	pager = delta
+	sshCommand = ssh.exe
+	eol = lf
 [user]
 	email = maicolbattistini@live.it
 	name = Maicol Battistini
@@ -54,3 +56,5 @@
 
 [diff]
     colorMoved = default
+[color]
+	ui = auto

@@ -17,10 +17,10 @@ if ! command -v nala &> /dev/null; then
     sudo apt-get install nala -y
 fi
 
-# Check if WSLg is available. If true, use dialogs to ask for user input. Otherwise, use old script (textual interface).
-if [ ! -z "$DISPLAY" ] || grep -qs '/mnt/wslg' /proc/mounts; then
+# Check if WSLg or GUI support is available
+if [ ! -z "$DISPLAY" ]; then
     fish .config/yadm/bootstrap.fish
 else
     # Coloured Error message
-    echo -e "\e[31mWSLg is not available. Please enable it to continue the setup\e[0m"
+    echo -e "\e[31mWSLg or GUI support is not available. Please enable it to continue the setup\e[0m"
 fi

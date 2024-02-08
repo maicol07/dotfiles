@@ -1,15 +1,26 @@
 #!/bin/bash
 
-# Fish PPA
-sudo apt-add-repository ppa:fish-shell/release-3 -y
+# Fish PPA (if not already added)
+grep -q "^deb .*fish-shell/release-3" /etc/apt/sources.list /etc/apt/sources.list.d/* || sudo apt-add-repository ppa:fish-shell/release-3 -y
 
-# Nala
-sudo apt-get update
-sudo apt-get install fish nala -y
+# Green coloured message
+echo -e "\e[32mUpdating package list and installing Fish and Nala if not already installed...\e[0m"
+
+# Install fish and nala (if not already installed)
+if ! command -v fish &> /dev/null; then
+    sudo apt-get update
+    sudo apt-get install fish -y
+fi
+
+if ! command -v nala &> /dev/null; then
+    sudo apt-get update
+    sudo apt-get install nala -y
+fi
 
 # Check if WSLg is available. If true, use dialogs to ask for user input. Otherwise, use old script (textual interface).
 if [ ! -z "$DISPLAY" ] || grep -qs '/mnt/wslg' /proc/mounts; then
     fish .config/yadm/bootstrap.fish
 else
-    fish .config/yadm/bootstrap_old.fish
+    # Coloured Error message
+    echo -e "\e[31mWSLg is not available. Please enable it to continue the setup\e[0m"
 fi

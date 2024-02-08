@@ -18,11 +18,23 @@ function read_confirm --description 'Ask the user for confirmation' --argument p
     end 
 end
 
-# Fisher
-cp $HOME/.config/fish/fish_plugins $HOME/.config/fish/fish_plugins_to_install
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-read -za plugins < $HOME/.config/fish/fish_plugins_to_install
-fisher install $plugins
+### Fisher ###
+# Check if fisher is installed
+if not test -f $HOME/.config/fish/functions/fisher.fish
+    echo "Fisher not found. Installing..."
+    curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+end
+
+mv $HOME/.config/fish/fish_plugins $HOME/.config/fish/fish_plugins_to_install
+# Diff installed packages and new to install
+set -l installed_plugins (fisher list | awk '{print $1}')
+set -l new_plugins (cat $HOME/.config/fish/fish_plugins_to_install)
+set -l plugins_to_install (echo $new_plugins $installed_plugins | tr ' ' '\n' | sort | uniq -u)
+# read -za plugins < $HOME/.config/fish/fish_plugins_to_install
+if test -n "$plugins_to_install"
+    echo "Installing new fisher plugins..."
+    fisher install (string join " " $plugins_to_install)
+end
 rm $HOME/.config/fish/fish_plugins_to_install
 
 # Custom repos
@@ -30,7 +42,7 @@ echo "deb http://packages.azlux.fr/debian/ buster main" | sudo tee /etc/apt/sour
 wget -qO - https://azlux.fr/repo.gpg | sudo apt-key add -
 curl -SsL https://packages.httpie.io/deb/KEY.gpg | apt-key add -
 curl -SsL -o /etc/apt/sources.list.d/httpie.list https://packages.httpie.io/deb/httpie.list
-sudo add-apt-repository ppa:marwanhawari/stew
+grep -q "^deb .*marwanhawari/stew" /etc/apt/sources.list /etc/apt/sources.list.d/* || sudo add-apt-repository ppa:marwanhawari/stew
 sudo nala update
 
 sudo nala install kdialog stew -y
@@ -65,6 +77,10 @@ set packages (kdialog --checklist "Select which package you want to install (rec
     "gping" "gping - Ping, but with a graph." on \
     "httpie" "httpie - A user-friendly cURL replacement." on \
     "zoxide" "zoxide - A fast cd command that learns your habits." on \
+    "dandavison/delta" "delta - A syntax-highlighting pager for git, diff, and grep output." on \
+    "tldr-pages/tlrc" "tlrc - A tldr client written in Rust" on \
+    "jesseduffield/lazygit" "lazygit - A git TUI" on \
+    "glow" "glow - Render markdown in CLI" on \
     "dog" "dog - A command-line DNS client." on)
 
 set nala_packages ""

@@ -55,7 +55,7 @@ end
 set packages (kdialog --checklist "Select which package you want to install (recommended options are preselected):" \
     "sharkdp/bat" "Bat - A cat clone with syntax highlighting and Git integration." on \
     "Peltoche/lsd" "lsd - The next gen file listing command. Backwards compatible with ls." on \
-    "zyedidia/micro" "Micro - A modern file editor." on \
+    "snap:micro" "Micro - A modern file editor." on \
     "fzf" "fzf - A command-line fuzzy finder." on \
     "neofetch" "neofetch - A command-line system information tool." on \
     "tree" "tree - A recursive directory listing command." on \
@@ -81,11 +81,16 @@ set packages (kdialog --checklist "Select which package you want to install (rec
     "tldr-pages/tlrc" "tlrc - A tldr client written in Rust" on \
     "jesseduffield/lazygit" "lazygit - A git TUI" on \
     "glow" "glow - Render markdown in CLI" on \
+    "snap:btop" "btop -  Resource monitor that shows usage and stats" on \
+    "snap:procs" "procs -  A modern replacement for ps written in Rust" on \
     "dog" "dog - A command-line DNS client." on)
 
 set nala_packages ""
 for package in $packages
-    if test (echo $package | grep -c "/") -gt 0
+    if string match -q "snap:" $package
+        set package (string replace -r "snap:" "" $package)
+        sudo snap install $package
+    else if test (echo $package | grep -c "/") -gt 0
         stew install $package
     else
         set nala_packages "$nala_packages $package"
@@ -104,7 +109,7 @@ kdialog --title "Web Backend" --yesno "Do you want to install web-backend relate
 if test $status -eq 0
     sudo add-apt-repository ppa:ondrej/php -y
     sudo nala update
-    sudo nala install -y mariadb-server php-cli php8.1-xdebug
+    sudo nala install -y mariadb-server php-cli php-xdebug
     # Fix for root access without password
     echo "ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password USING PASSWORD('');" | sudo mysql
 end

@@ -37,11 +37,19 @@ if test -n "$plugins_to_install"
 end
 rm $HOME/.config/fish/fish_plugins_to_install
 
-# Custom repos
-echo "deb http://packages.azlux.fr/debian/ buster main" | sudo tee /etc/apt/sources.list.d/azlux.list
-wget -qO - https://azlux.fr/repo.gpg | sudo apt-key add -
+### Custom repos ###
+# Azlux
+echo "deb [signed-by=/usr/share/keyrings/azlux-archive-keyring.gpg] http://packages.azlux.fr/debian/ stable main" | sudo tee /etc/apt/sources.list.d/azlux.list
+sudo wget -O /usr/share/keyrings/azlux-archive-keyring.gpg  https://azlux.fr/repo.gpg
+
+# Charm (Glow)
+curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/charm.gpg
+echo "deb [signed-by=/usr/share/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
+
+# Httpie
 curl -SsL https://packages.httpie.io/deb/KEY.gpg | apt-key add -
 curl -SsL -o /etc/apt/sources.list.d/httpie.list https://packages.httpie.io/deb/httpie.list
+# Stew
 grep -q "^deb .*marwanhawari/stew" /etc/apt/sources.list /etc/apt/sources.list.d/* || sudo add-apt-repository ppa:marwanhawari/stew
 sudo nala update
 
@@ -61,7 +69,6 @@ set packages (kdialog --checklist "Select which package you want to install (rec
     "tree" "tree - A recursive directory listing command." on \
     "ttf-mscorefonts-installer" "ttf-mscorefonts-installer - Microsoft core fonts." off \
     "xclip" "xclip - Command line interface to the X11 clipboard (recommended if you are using micro and X11/WSLg)." on \
-    "dandavison/delta" "Delta - A viewer for git and diff output." on \
     "tldr" "TLDR - A collection of community-maintained help pages for command-line tools." on \
     "zip" "zip - A compression and file packaging/archive utility." on \
     "unzip" "unzip - A compression and file packaging/archive utility." on \
@@ -72,7 +79,6 @@ set packages (kdialog --checklist "Select which package you want to install (rec
     "duf" "duf - Disk Usage/Free Utility - a better 'df' alternative." on \
     "sharkdp/fd" "fd - A simple, fast and user-friendly alternative to 'find'." on \
     "broot" "broot - A new way to see and navigate directory trees." on \
-    "choose" "choose - A fuzzy finder in rust." on \
     "ClementTsang/bottom" "bottom - A cross-platform graphical process/system monitor." on \
     "gping" "gping - Ping, but with a graph." on \
     "httpie" "httpie - A user-friendly cURL replacement." on \
@@ -82,18 +88,18 @@ set packages (kdialog --checklist "Select which package you want to install (rec
     "jesseduffield/lazygit" "lazygit - A git TUI" on \
     "glow" "glow - Render markdown in CLI" on \
     "snap:btop" "btop -  Resource monitor that shows usage and stats" on \
-    "snap:procs" "procs -  A modern replacement for ps written in Rust" on \
-    "dog" "dog - A command-line DNS client." on)
+    "snap:procs" "procs -  A modern replacement for ps written in Rust" on)
 
-set nala_packages ""
-for package in $packages
-    if string match -q "snap:" $package
-        set package (string replace -r "snap:" "" $package)
+set nala_packages
+for package in (echo $packages | string trim | string split " ")
+    set -l package (string trim --chars=\" $package)
+    if string match -q "snap:*" $package
+        set -l package (string replace -r "snap:" "" $package)
         sudo snap install $package
     else if test (echo $package | grep -c "/") -gt 0
         stew install $package
     else
-        set nala_packages "$nala_packages $package"
+        set nala_packages $nala_packages $package
     end
 end
 

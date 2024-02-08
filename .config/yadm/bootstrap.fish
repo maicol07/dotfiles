@@ -29,12 +29,8 @@ mv $HOME/.config/fish/fish_plugins $HOME/.config/fish/fish_plugins_to_install
 # Diff installed packages and new to install
 set -l installed_plugins (fisher list | awk '{print $1}')
 set -l new_plugins (cat $HOME/.config/fish/fish_plugins_to_install)
-set -l plugins_to_install (echo $new_plugins $installed_plugins | tr ' ' '\n' | sort | uniq -u)
-# read -za plugins < $HOME/.config/fish/fish_plugins_to_install
-if test -n "$plugins_to_install"
-    echo "Installing new fisher plugins..."
-    fisher install (string join " " $plugins_to_install)
-end
+set -l plugins_to_install (echo $new_plugins $installed_plugins | tr ' ' '\n' | uniq -u)
+fisher install $plugins_to_install
 rm $HOME/.config/fish/fish_plugins_to_install
 
 ### Custom repos ###
@@ -135,8 +131,10 @@ if test $status -eq 0
         if test $status -eq 0
             wget http://github.com/nullpo-head/WSL-Hello-sudo/releases/latest/download/release.tar.gz
             tar xvf release.tar.gz
-            ./release/install.sh
-            rm release
+            cd release
+            ./install.sh
+            cd ..
+            mv release .wsl-hello-sudo
             rm release.tar.gz
         end
 

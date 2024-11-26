@@ -1,6 +1,5 @@
 [core]
-	autocrlf = true
-	pager = delta
+	autocrlf = input
 	sshCommand = ssh.exe
 	eol = lf
 [user]
@@ -26,6 +25,7 @@
 
 [commit]
   gpgsign = true
+
 [cola]
 	spellcheck = false
 	statusshowtotals = true
@@ -45,16 +45,21 @@
 [includeIf "gitdir:~/Projects/Trust-IT/"]
 	path = .gitlab.gitconfig
 
-[interactive]
-    diffFilter = delta --color-only
-
-[delta]
-    navigate = true
+[diff]
+tool = araxis
+[difftool "araxis"]
+cmd = '/mnt/c/Program Files/Araxis/Araxis Merge/arx_wsl_git_compare' $BASE $LOCAL $REMOTE
 
 [merge]
-    conflictstyle = diff3
+tool = araxis
+[mergetool "araxis"]
+cmd = '/mnt/c/Program Files/Araxis/Araxis Merge/arx_wsl_git_merge' $BASE $LOCAL $REMOTE $MERGED
 
-[diff]
-    colorMoved = default
-[color]
-	ui = auto
+[alias]
+ad = difftool --tool=araxis --dir-diff --no-symlinks
+ads = difftool --tool=araxis --dir-diff --no-symlinks --staged
+[safe]
+	directory = /home/maicol07/Projects/Trust-IT/oih-ui-docker
+	directory = /home/maicol07/Projects/Trust-IT/oih-ui-docker/frontend
+	directory = /home/maicol07/Projects/Trust-IT/oih-ui-docker/api
+	directory = /home/maicol07/Projects/Trust-IT/oih-ui-docker/indexer

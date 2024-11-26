@@ -1,5 +1,3 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/bashrc.pre.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.pre.bash"
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -118,10 +116,19 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export GPG_TTY=$(tty)
+#AWSume alias to source the AWSume script
+alias awsume="source awsume"
 
-export DISPLAY=127.0.0.1:0.0 #GWSL
-export PULSE_SERVER=tcp:127.0.0.1 #GWSL
+#Auto-Complete function for AWSume
+_awsume() {
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts=$(awsume-autocomplete)
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    return 0
+}
+complete -F _awsume awsume
 
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.post.bash"
+complete -C /usr/local/bin/terragrunt terragrunt

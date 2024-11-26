@@ -1,0 +1,23 @@
+blocks:
+  - permission
+  - user
+  - group
+  - size
+  - date
+  - name
+  - inode
+  - links
+  - git
+
+color:
+  # if you're using LSD verion prior to 1.0.0, uncomment one the following lines
+  # theme: solarized-light
+  # theme: solarized-dark
+  # if you're using LSD verion 1.0.0 or later, uncomment the following line
+  theme: custom
+
+indicators: true
+# permission: octal
+total-size: true
+hyperlink: auto
+header: true

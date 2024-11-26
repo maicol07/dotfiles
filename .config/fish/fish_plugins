@@ -1,10 +1,10 @@
 jorgebucaran/fisher
-ilancosman/tide
-jorgebucaran/autopair.fish
+adriaanzon/fish-artisan-completion
 gazorby/fish-abbreviation-tips
+jorgebucaran/autopair.fish
+jorgebucaran/getopts.fish
+jorgebucaran/nvm.fish
 jorgebucaran/spark.fish
 patrickf1/fzf.fish
-jorgebucaran/nvm.fish
-adriaanzon/fish-artisan-completion
 wfxr/forgit
-jorgebucaran/getopts.fish
+james2doyle/omf-plugin-sail
